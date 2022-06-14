@@ -10,6 +10,13 @@ const getBoards = (req, res, next) => {
   });
 };
 
+const getBoard = (req, res, next) => {
+  const boardId = req.params.id;
+  Board.findById(boardId).
+  //how to query mongo db for spec. board
+  res.json({msg: 'endpoint is good'})
+}
+
 const createBoard = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -28,4 +35,5 @@ const createBoard = (req, res, next) => {
 };
 
 exports.getBoards = getBoards;
+exports.getBoard = getBoard;
 exports.createBoard = createBoard;
