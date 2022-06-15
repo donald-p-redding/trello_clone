@@ -28,7 +28,7 @@ const ListSchema = new Schema({
   }]
 })
 
-const List = mongoose.model('List', ListSchema);
+const List = mongoose.model('list', ListSchema);
 module.exports = List;
 
 // const ToySchema = new Schema({ name: String });
