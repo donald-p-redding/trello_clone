@@ -7,7 +7,8 @@ const ListSchema = new Schema({
     required: [true, 'A list title is required']
   },
   boardId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: 'board',
     required: [true, 'A list must have a boardId']
   },
   createdAt: {
@@ -24,22 +25,9 @@ const ListSchema = new Schema({
   },
   cards: [{
     type: Schema.Types.ObjectId,
-    ref: 'Card'
+    ref: 'card'
   }]
 })
 
 const List = mongoose.model('list', ListSchema);
 module.exports = List;
-
-// const ToySchema = new Schema({ name: String });
-// const ToyBoxSchema = new Schema({
-//   toys: [ToySchema],
-//   buffers: [Buffer],
-//   strings: [String],
-//   numbers: [Number]
-//   // ... etc
-// });
-
-// * Commit Message*
-
-// Co-authored-by: Anne Jones anne1365@outlook.com

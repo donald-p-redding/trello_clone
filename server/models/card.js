@@ -14,11 +14,13 @@ const CardSchema = new Schema({
     type: String
   },
   listId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: 'list',
     required: [true, 'A card must be assoc. with a list']
   },
   boardId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: 'board',
     required: [true, 'A card must be assoc. with a board']
   },
   position: {
