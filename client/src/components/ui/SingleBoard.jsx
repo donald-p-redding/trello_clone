@@ -1,5 +1,11 @@
 import React from "react";
 const SingleBoard = () => {
+  /*fetch all the contents of a board
+      - lists
+          - cards
+
+    localhost:5000/boards/
+  */
   return (
     <>
        <header>
