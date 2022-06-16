@@ -1,16 +1,37 @@
-export default function boards(state = [], action) {
-  switch (action.type) {
-    case "FETCH_BOARDS_SUCCESS": {
-      return action.boards;
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import apiClient from "../lib/ApiClient";
+
+const initialState = [];
+
+export const fetchBoards = createAsyncThunk("boards/fetchBoards", async () => {
+  const data = await apiClient.getBoards();
+  const { boards } = data
+  return boards;
+});
+
+export const createBoard = createAsyncThunk(
+  "boards/createBoard",
+  async (newBoard, callback) => {
+    const data = await apiClient.createBoard(newBoard);
+    if (callback) {
+      callback;
     }
-    case "CREATE_BOARD_SUCCESS": {
-      const newBoard = action.board;
-      return state.concat(newBoard);
-    }
-    case "FETCH_SINGLE_BOARD_SUCCESS": {
-      return state
-    }
-    default:
-      return state;
+    return data;
   }
-}
+);
+
+const boardSlice = createSlice({
+  name: "boards",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchBoards.fulfilled, (state, action) => {
+      return action.payload;
+    }),
+      builder.addCase(createBoard.fulfilled, (state, action) => {
+        state.push(action.payload);
+      });
+  },
+});
+
+export default boardSlice.reducer;
