@@ -1,19 +1,12 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import useInput from "../../hooks/useInput";
-import * as actions from "../../actions/BoardActions";
+import { createBoard } from "../../reducers/boards";
 
 const NewBoardForm = (props) => {
   const { value: title, bind: bindTitle } = useInput("");
 
   const dispatch = useDispatch();
-
-  const createBoard = useCallback(
-    (newBoard, callback) => {
-      dispatch(actions.createBoard(newBoard, callback));
-    },
-    [dispatch]
-  );
 
   const handleSubmit = useCallback(
     (e) => {
@@ -21,7 +14,7 @@ const NewBoardForm = (props) => {
       e.stopPropagation();
 
       const newBoard = { title };
-      createBoard(newBoard, props.onCloseClick(new Event("click")));
+      dispatch(createBoard(newBoard, props.onCloseClick(new Event("click"))));
     },
     [createBoard, props, title]
   );
