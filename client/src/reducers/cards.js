@@ -11,10 +11,10 @@ const cardSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
       const { lists } = action.payload
-      return lists.reduce((accum, { cards }) => {
+      return lists.reduce((_, { cards }) => {
         return [...cards]
       },[])
-    })
+    });
   },
 });
 
