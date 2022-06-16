@@ -5,6 +5,7 @@
   "proxy": "http://localhost:5000",
   "dependencies": {
     "@babel/core": "^7.13.0",
+    "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -20,6 +21,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "4.0.2",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

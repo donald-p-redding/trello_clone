@@ -12,7 +12,8 @@ const UISection = () => {
     "Due Date Popover",
     "Labels Popover",
     "Move Card Popover",
-    "Single Board"
+    "Single Board",
+    "Single Board View"
   ];
   const links = LINK_FILES.map((link,idx) => {
     let formattedLink = link.split(" ");
