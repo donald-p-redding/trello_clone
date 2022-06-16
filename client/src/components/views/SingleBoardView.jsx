@@ -2,6 +2,7 @@ import { React, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector, useDispatch } from "react-redux";
 import Lists from '../list components/Lists';
+import { fetchBoard } from "../../reducers/boards";
 
 const SingleBoardView = () => {
   const { id } = useParams()
@@ -12,6 +13,7 @@ const SingleBoardView = () => {
 
 
   useEffect(() => {
+    dispatch(fetchBoard(id));
   }, [dispatch])
 
   if(board === undefined) {  // boards resets to [] on a referesh

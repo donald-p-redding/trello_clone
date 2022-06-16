@@ -1,20 +1,29 @@
-export default function lists(state = [], action) {
-  switch (action.type) {
-    case "FETCH_SINGLE_BOARD_SUCCESS": {
-      const   { lists }  = action.data
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { fetchBoard } from "./boards";
+
+const initialState = []
+
+const listSlice = createSlice({
+  name: "lists",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchBoard.fulfilled, (state, action) => {
+      const { lists } = action.payload;
       return lists.map(list => {
-        const { _id, boardId, createdAt, position, title, updatedAt} = list
+        const { _id, boardId, createdAt, position, title, updatedAt } = list;
         return {
           _id,
-          boardId,
           createdAt,
           position,
+          boardId,
           title,
-          updatedAt
+          updatedAt,
         }
-      });
-    }
-    default:
-      return state;
-  }
-}
+      })
+    })
+  },
+});
+
+
+export default listSlice.reducer;

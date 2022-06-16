@@ -9,6 +9,11 @@ export const fetchBoards = createAsyncThunk("boards/fetchBoards", async () => {
   return boards;
 });
 
+export const fetchBoard = createAsyncThunk("boards/fetchBoard", async (id) => {
+  const board = await apiClient.getBoard(id);
+  return board;
+})
+
 export const createBoard = createAsyncThunk(
   "boards/createBoard",
   async (newBoard, callback) => {
@@ -28,9 +33,9 @@ const boardSlice = createSlice({
     builder.addCase(fetchBoards.fulfilled, (state, action) => {
       return action.payload;
     }),
-      builder.addCase(createBoard.fulfilled, (state, action) => {
-        state.push(action.payload);
-      });
+    builder.addCase(createBoard.fulfilled, (state, action) => {
+      state.push(action.payload);
+    });
   },
 });
 
