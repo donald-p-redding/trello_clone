@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchBoard } from "./boards";
 
 
@@ -11,9 +11,13 @@ const cardSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
       const { lists } = action.payload
-      return lists.reduce((_, { cards }) => {
-        return [...cards]
-      },[])
+      const results = [];
+      lists.forEach(list => {
+        list.cards.forEach(card => {
+          results.push(card);
+        })
+      })
+      return results;
     });
   },
 });

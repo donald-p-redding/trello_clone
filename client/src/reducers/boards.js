@@ -36,6 +36,9 @@ const boardSlice = createSlice({
     builder.addCase(createBoard.fulfilled, (state, action) => {
       state.push(action.payload);
     });
+    builder.addCase(fetchBoard.fulfilled, (state, action) => {
+      return [action.payload];
+    })
   },
 });
 

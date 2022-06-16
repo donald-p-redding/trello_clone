@@ -35,7 +35,9 @@ const SingleBoardView = () => {
           <i className="sub-icon sm-icon"></i>Subscribed
         </div>
       </header>
-      <Lists />
+      <main>
+        <Lists />
+      </main>
     </>
   )
 }
