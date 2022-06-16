@@ -31,7 +31,6 @@ const BoardsDashboard = (props) => {
           {boardTiles}
           <CreateBoardTile onClick={props.onNewBoardClick} />
         </ul>
-        <h1>Hello from components!</h1>
       </section>
     </main>
   );

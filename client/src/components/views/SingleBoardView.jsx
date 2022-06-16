@@ -1,30 +1,30 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../../actions/BoardActions";
+import Lists from '../list components/Lists';
 
 const SingleBoardView = () => {
   const { id } = useParams()
-  const [ board, setBoard ] = useState({});
+  const { boards } = useSelector(state => state);
+  const board = boards.find(b => b._id === id)
+
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
-    const boardData = async () => {
-      const { data } = await axios.get(`/api/boards/${id}`);
-      setBoard(data);
-      return data;
-    }
-  })
+    dispatch(actions.fetchSingleBoard(id))
+  }, [dispatch])
 
-  console.log(board);
- /*
-    Fetch the specific board --> localhost:5000/api/boards/:id
-    -- keep local state
-    -- redux
-  */
+  if(board === undefined) {  // boards resets to [] on a referesh
+    return null
+  }
+
   return (
     <>
       <header>
         <ul>
-          <li id="title">My Title</li>
+          <li id="title">{board.title}</li>
           <li className="star-icon icon"></li>
           <li className="private private-icon icon">Private</li>
         </ul>
@@ -35,6 +35,7 @@ const SingleBoardView = () => {
           <i className="sub-icon sm-icon"></i>Subscribed
         </div>
       </header>
+      <Lists />
     </>
   )
 }
