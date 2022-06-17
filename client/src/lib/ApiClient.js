@@ -44,6 +44,7 @@ const apiClient = {
     console.log("dispatching to backend")
     try {
       const { data } = await axios.post(routes.LISTS_INDEX_URL, reqPayload)
+      console.log("backend request succ.", data)
       return data
     } catch (e) {
       logError(e)

@@ -12,13 +12,13 @@ export const fetchBoards = createAsyncThunk("boards/fetchBoards", async () => {
 export const fetchBoard = createAsyncThunk("boards/fetchBoard", async (id) => {
   const board = await apiClient.getBoard(id);
   return board;
-})
+});
 
 export const createBoard = createAsyncThunk(
   "boards/createBoard",
   async (newBoard, callback) => {
     const data = await apiClient.createBoard(newBoard);
-    console.log("this is data field",data)
+    console.log("create board thunk")
     if (callback) {
       callback;
     }

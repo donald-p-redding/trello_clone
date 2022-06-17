@@ -7,15 +7,13 @@ const initialState = []
 
 export const createList = createAsyncThunk(
   "lists/createList",
-  async(reqPayload, callback) => {
-    console.log("req. in async thunk")
+  async(reqPayload) => {
+    console.log("createList asyncThunk")
     const data = await apiClient.createList(reqPayload)
-    if(callback) {
-      callback()
-    }
-    return data
+    console.log("handing data to builder");
+    return data;
   }
-)
+);
 
 const listSlice = createSlice({
   name: "lists",
@@ -35,12 +33,11 @@ const listSlice = createSlice({
           updatedAt,
         }
       })
-    }),
+    })
 
     builder.addCase(createList.fulfilled, (state, action) => {
-      console.log("xtra reducer for create list");
-      return state;
-    });
+      return [...state, action.payload];
+    })
   },
 });
 
