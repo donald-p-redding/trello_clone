@@ -35,8 +35,6 @@ const boardSlice = createSlice({
       return action.payload;
     }),
     builder.addCase(createBoard.fulfilled, (state, action) => {
-      console.log("xtra reduce in board", action.payload)
-      console.log("payload", action.payload)
       return [...state, action.payload];
     });
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
