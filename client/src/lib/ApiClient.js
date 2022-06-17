@@ -40,6 +40,16 @@ const apiClient = {
       logError(e);
     }
   },
+  createList: async(reqPayload) => {
+    console.log("dispatching to backend")
+    try {
+      const { data } = await axios.post(routes.LISTS_INDEX_URL, reqPayload)
+      console.log("backend request succ.", data)
+      return data
+    } catch (e) {
+      logError(e)
+    }
+  },
 };
 
 export default apiClient;

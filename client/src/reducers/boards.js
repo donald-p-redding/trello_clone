@@ -12,13 +12,13 @@ export const fetchBoards = createAsyncThunk("boards/fetchBoards", async () => {
 export const fetchBoard = createAsyncThunk("boards/fetchBoard", async (id) => {
   const board = await apiClient.getBoard(id);
   return board;
-})
+});
 
 export const createBoard = createAsyncThunk(
   "boards/createBoard",
   async (newBoard, callback) => {
     const data = await apiClient.createBoard(newBoard);
-    console.log("this is data field",data)
+    console.log("create board thunk")
     if (callback) {
       callback;
     }
@@ -32,12 +32,15 @@ const boardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBoards.fulfilled, (state, action) => {
+      console.log("xtra reducer for all boards");
       return action.payload;
     }),
     builder.addCase(createBoard.fulfilled, (state, action) => {
+      console.log("entering xtra reducer.")
       return [...state, action.payload];
     });
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
+      console.log("xtra reduver for single board")
       return [action.payload];
     })
   },
