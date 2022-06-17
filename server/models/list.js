@@ -14,14 +14,14 @@ const ListSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    required: [true, 'A timestamp for createdAt is needed to submit.']
   },
   updatedAt: {
     type: Date,
-    required: [true, 'A timestamp for updatedAt is needed to submit.']
+    default: Date.now,
   },
   position: {
-    type: Number
+    type: Number,
+    default: 65535.0
   },
   cards: [{
     type: Schema.Types.ObjectId,
