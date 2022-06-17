@@ -18,10 +18,11 @@ export const createBoard = createAsyncThunk(
   "boards/createBoard",
   async (newBoard, callback) => {
     const data = await apiClient.createBoard(newBoard);
+    console.log("this is data field",data)
     if (callback) {
       callback;
     }
-    return data;
+    return data[0];
   }
 );
 
@@ -34,7 +35,7 @@ const boardSlice = createSlice({
       return action.payload;
     }),
     builder.addCase(createBoard.fulfilled, (state, action) => {
-      state.push(action.payload);
+      return [...state, action.payload];
     });
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
       return [action.payload];
