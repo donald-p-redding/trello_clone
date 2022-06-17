@@ -1,7 +1,7 @@
 import { React, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector, useDispatch } from "react-redux";
-import Lists from '../list components/Lists';
+import Lists from '../list_components/Lists';
 import { fetchBoard } from "../../reducers/boards";
 
 const SingleBoardView = () => {
