@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import BoardTile from "./BoardTile";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchBoards } from "../../reducers/boards"
+import { fetchBoards } from "../../features/boards"
 import CreateBoardTile from "./CreateBoardTile";
 
 const BoardsDashboard = (props) => {
