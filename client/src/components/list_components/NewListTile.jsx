@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createList } from "../../reducers/lists";
+import { createList } from "../../features/lists";
 
 
 const NewListTile = () => {

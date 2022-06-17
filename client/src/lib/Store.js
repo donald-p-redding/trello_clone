@@ -1,8 +1,8 @@
 
 import { configureStore } from "@reduxjs/toolkit";
-import boardsReducer from "../reducers/boards";
-import listsReducer from "../reducers/lists";
-import cardsReducer from "../reducers/cards"
+import boardsReducer from "../features/boards";
+import listsReducer from "../features/lists";
+import cardsReducer from "../features/cards"
 
 const store = configureStore({
   reducer: {
