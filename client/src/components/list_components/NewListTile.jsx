@@ -2,7 +2,6 @@ import { React, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createList } from "../../features/lists";
 
-
 const NewListTile = () => {
   const [ selected, setSelected ] = useState('')
   const [ title, setTitle ] = useState("")
@@ -23,11 +22,10 @@ const NewListTile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('handing req to reducer')
     dispatch(createList({boardId, list: {title}}))
-  }
+  };
 
-  return (
+ return (
     <div onClick={handleClick} id="new-list" className={`new-list ${selected}`}>
       <span>Add a list...</span>
       <input onChange={handleChange} type="text" placeholder="Add a list..." value={title} />

@@ -2,15 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchBoard } from "./boards";
 import apiClient from "../lib/ApiClient";
 
-
 const initialState = []
 
 export const createList = createAsyncThunk(
   "lists/createList",
   async(reqPayload) => {
-    console.log("createList asyncThunk")
     const data = await apiClient.createList(reqPayload)
-    console.log("handing data to builder");
     return data;
   }
 );
@@ -21,7 +18,7 @@ const listSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
-      const { lists } = action.payload;
+      let { lists } = action.payload;
       return lists.map(list => {
         const { _id, boardId, createdAt, position, title, updatedAt } = list;
         return {
@@ -40,6 +37,5 @@ const listSlice = createSlice({
     })
   },
 });
-
 
 export default listSlice.reducer;

@@ -1,35 +1,13 @@
 import React from "react";
-import { MS_PER_DAY, MONTH_NUM_TO_STR } from "../../constants/Time";
+import dueClass from "../../lib/utils/dueClass";
+import dueDateStr from "../../lib/utils/dueDateStr";
 
 const Card = ({ card }) => { 
-  const { labels, dueDate } = card
+  const { labels } = card
   const labelsToRender = labels.map(label => {
     return <div key={label} className={`card-label ${label} colorblindable`} />
   })
-
-  const dueDateObj = new Date(dueDate)
-  const dueMonth = MONTH_NUM_TO_STR[dueDateObj.getMonth()]
-  const dueDateStr = dueDateObj.getDate();
-
-  const cardDueDateMiliseconds = Date.parse(dueDate)
-  const todayMiliseconds = Date.now()
-  const diff = todayMiliseconds - cardDueDateMiliseconds;
-
-  let dueDateIcon;
-
-  if(diff < 0) {
-    //need add. logic to account for completed cards
-    dueDateIcon = <i className="clock-icon sm-icon overdue ">{`${dueMonth} ${dueDateStr}`}</i>
-  } else {
-    const daysUntil = diff / MS_PER_DAY;
-    if(daysUntil > 7) {
-      dueDateIcon = <i className="clock-icon sm-icon overdue-recent ">{`${dueMonth} ${dueDateStr}`}</i>
-    } else {
-      dueDateIcon = <i className="clock-icon sm-icon due-soon ">{`${dueMonth} ${dueDateStr}`}</i>
-    }
-  }
  
-
   return (
     <div className="card-background">
       <div className="card ">
@@ -42,7 +20,7 @@ const Card = ({ card }) => {
           </p>
         </div>
         <div className="card-icons">
-          {dueDateIcon}
+          <i className={`clock-icon sm-icon ${dueClass(card)}`}>{dueDateStr(card)}</i>
         </div>
       </div>
     </div>

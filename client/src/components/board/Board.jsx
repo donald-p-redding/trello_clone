@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Lists from '../list_components/Lists';
 import { fetchBoard } from "../../features/boards";
 
-const SingleBoardView = () => {
+const Board = () => {
   const { id } = useParams()
   const { boards } = useSelector(state => state);
   const board = boards.find(b => b._id === id)
@@ -14,9 +14,9 @@ const SingleBoardView = () => {
 
   useEffect(() => {
     dispatch(fetchBoard(id));
-  }, [dispatch])
+  }, [dispatch, id])
 
-  if(board === undefined) {  // boards resets to [] on a referesh
+  if(board === undefined) {
     return null
   }
 
@@ -42,4 +42,4 @@ const SingleBoardView = () => {
   )
 }
 
-export default SingleBoardView;
+export default Board;

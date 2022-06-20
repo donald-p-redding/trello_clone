@@ -1,7 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import List from "./List";
-import NewListTile from "./NewListTile";
+import React from "react"
+import { useSelector } from "react-redux"
+import List from "./List"
+import NewListTile from "./NewListTile"
 
 const Lists = () => {
   const { lists } = useSelector(state => state);

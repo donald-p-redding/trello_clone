@@ -32,16 +32,15 @@ const boardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBoards.fulfilled, (state, action) => {
-      console.log("xtra reducer for all boards");
       return action.payload;
     }),
     builder.addCase(createBoard.fulfilled, (state, action) => {
-      console.log("entering xtra reducer.")
       return [...state, action.payload];
     });
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
-      console.log("xtra reduver for single board")
-      return [action.payload];
+      const { lists, ...filteredBoard} = action.payload;
+      const filteredState = state.filter(b => b._id != action.payload._id);
+      return [...filteredState, filteredBoard];
     })
   },
 });
