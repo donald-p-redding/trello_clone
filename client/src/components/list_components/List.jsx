@@ -8,7 +8,7 @@ const List = ({list}) => {
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
           <div>
-            <p className="list-title">{list.title}</p>
+          <input className="list-title" type="text" value={list.title} autoFocus='true'></input>
           </div>
           <div className="add-dropdown add-top">
             <div className="card"></div>
@@ -40,5 +40,16 @@ const List = ({list}) => {
     </div>
   )
 };
+
+/*
+                  <div>
+                    <input
+                      type="text"
+                      className="list-title"
+                      value="List title during editing"
+                      autoFocus="true"
+                    />
+                  </div>
+*/
 
 export default List;
