@@ -20,7 +20,6 @@ const createList = (req, resp, next) => {
 
       //query for a sanatized list to return to front end
       List.find({_id: list._id}, "title _id boardId createdAt updatedAt position").then(lists => {
-        console.log("Filtered list", lists)
         resp.json(lists[0])
       })
     })
@@ -36,9 +35,12 @@ const updateListTitle = async (req, res, next) => {
   if(errors.isEmpty()) {
     try {
       const { title } = req.body
-      console.log("Sending update list title request to DB")
       const resp = await List.findByIdAndUpdate(listId, {title}, )
-      console.log("resp", resp)
+      List.find({_id: listId}, "title _id boardId createdAt updatedAt position").then(lists => {
+        console.log(lists[0])
+        res.json(lists[0])
+      })
+      
     } catch (e) {
       next(new HttpError(`${e.message}`, 500))
     }

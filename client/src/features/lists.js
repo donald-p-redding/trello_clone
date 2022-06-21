@@ -48,6 +48,16 @@ const listSlice = createSlice({
     builder.addCase(createList.fulfilled, (state, action) => {
       return [...state, action.payload]
     })
+
+    builder.addCase(updateListTitle.fulfilled, (state, action) => {
+      return state.map(list => {
+        if (action.payload._id === list._id) {
+          return action.payload
+        } else {
+          return list
+        }
+      })
+    })
   },
 })
 

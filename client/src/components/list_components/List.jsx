@@ -22,14 +22,14 @@ const List = ({list}) => {
   }
 
   return (
-      <div className="list-wrapper">
+    <div className="list-wrapper">
       <div className="list-background">
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
           <div>
             {
               isEditing ?
-              <input onBlur={updateList} onChange={handleChange} className="list-title" type="text" value={listTitle} autoFocus='true'></input>
+              <input onBlur={updateList} onChange={handleChange} className="list-title" type="text" value={listTitle} autoFocus={true}></input>
               : <p onClick={() => setIsEditing(!isEditing) } className="list-title">{list.title}</p>
             }
           </div>
@@ -41,7 +41,6 @@ const List = ({list}) => {
               <span>...</span>
             </div>
           </div>
-          {/*This is where cards need to go*/}.
           <Cards listId={list._id}/>
           <div className="add-dropdown add-bottom">
             <div className="card">

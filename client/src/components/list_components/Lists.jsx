@@ -9,8 +9,6 @@ const Lists = () => {
   const listsContent = lists.map((list) => {
     return <List key={list._id} list={list}/>
   })
-
-
   
   return (
     <>

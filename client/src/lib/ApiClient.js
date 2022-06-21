@@ -51,7 +51,6 @@ const apiClient = {
   updateListTitle: async({ id, payload }) => {
     try {
       const { data } = await axios.put(`${routes.LISTS_INDEX_URL}/${id}`, payload)
-      console.log("Backend req. succ.")
       return data
     } catch (e) {
       console.log("Error thrown in update list title")

@@ -1,13 +1,13 @@
-import React from "react";
-import dueClass from "../../lib/utils/dueClass";
-import dueDateStr from "../../lib/utils/dueDateStr";
+import React from "react"
+import dueClass from "../../lib/utils/dueClass"
+import dueDateStr from "../../lib/utils/dueDateStr"
 
-const Card = ({ card }) => { 
+const Card = ({ card }) => {
   const { labels } = card
   const labelsToRender = labels.map(label => {
     return <div key={label} className={`card-label ${label} colorblindable`} />
   })
- 
+
   return (
     <div className="card-background">
       <div className="card ">
@@ -25,6 +25,6 @@ const Card = ({ card }) => {
       </div>
     </div>
   )
-};
+}
 
-export default Card;
+export default Card

@@ -42,7 +42,8 @@ const boardSlice = createSlice({
       return [...state, action.payload]
     })
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
-      const { lists, ...filteredBoard} = action.payload
+      // eslint-disable-next-line no-unused-vars
+      const { lists, ...filteredBoard } = action.payload
       const filteredState = state.filter(b => b._id != action.payload._id)
       return [...filteredState, filteredBoard]
     })
