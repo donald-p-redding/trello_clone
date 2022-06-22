@@ -6,29 +6,49 @@ const CardSchema = new Schema({
     type: String,
     required: [true, 'A card must have a title']
   },
-  dueDate: {
-    type: Date
+  description: {
+    type: String,
+    default: ''
   },
   labels: [String],
-  description: {
-    type: String
-  },
   listId: {
     type: Schema.Types.ObjectId,
     ref: 'list',
     required: [true, 'A card must be assoc. with a list']
+  },
+  position: {
+    type: Number,
+    default: 65535.0
+  },
+  archived: {
+    type: Boolean,
+    default: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  },
+  dueDate: {
+    type: Date
+  },
+  completed: {
+    type: Boolean,
+    default: false
   },
   boardId: {
     type: Schema.Types.ObjectId,
     ref: 'board',
     required: [true, 'A card must be assoc. with a board']
   },
-  position: {
-    type: Number
-  },
+  comments: [String],
   commentsCount: {
     type: Number,
-  }
+  },
+  actions: [String]
 })
 
 const Card = mongoose.model('card', CardSchema);
