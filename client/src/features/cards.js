@@ -1,6 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchBoard } from "./boards";
-
+import { createSlice } from "@reduxjs/toolkit"
+import { fetchBoard } from "./boards"
 
 const initialState = []
 
@@ -11,16 +10,15 @@ const cardSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchBoard.fulfilled, (state, action) => {
       const { lists } = action.payload
-      const results = [];
+      const results = []
       lists.forEach(list => {
         list.cards.forEach(card => {
-          results.push(card);
+          results.push(card)
         })
       })
-      return results;
-    });
+      return results
+    })
   },
-});
+})
 
-
-export default cardSlice.reducer;
+export default cardSlice.reducer

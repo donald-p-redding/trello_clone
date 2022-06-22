@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 
-
 const Cards = ({listId}) => {
   const { cards } = useSelector(state =>  state)
   const filteredCards = cards.filter(card => card.listId === listId)

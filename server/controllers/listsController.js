@@ -1,35 +1,45 @@
-const HttpError = require("../models/httpError");
-const { validationResult } = require("express-validator");
-const List = require('../models/list');
-const Board = require("../models/board");
+const HttpError = require("../models/httpError")
+const { validationResult } = require("express-validator")
+const List = require('../models/list')
+const Board = require("../models/board")
 
-const createList = (req, resp, next) => {
-  const errors = validationResult(req);
+const createList = async (req, res, next) => {
+  const errors = validationResult(req)
+
   if(errors.isEmpty()) {
-    const { boardId, list:{title} } = req.body;
-    console.log("sending req to DB");      
-    List.create({boardId, title}).then(list => {
-      console.log("Origional DB response", list)
-
-      //add new list to the correct board
-      Board.updateOne(
-        { _id: list.boardId},
-        { $push: { lists: [list._id] } }
-      ).then(response => {
-        console.log("list added to board array")
-        console.log(response);
-      })
-
-      //query for a sanatized list to return to front end
-      List.find({_id: list._id}, "title _id boardId createdAt updatedAt position").then(lists => {
-        console.log("Filtered list", lists);
-        resp.json(lists[0]);
-      });
-    })
+    const { boardId, list:{title} } = req.body
+    const  returnList  = await List.create({boardId, title})
+    const  _boardConf  = await Board.updateOne(
+                                { _id: returnList.boardId},
+                                { $push: { lists: [returnList._id] } }
+                               )
+    const  lists  = await List.find({_id: returnList._id}, "title _id boardId createdAt updatedAt position")
+    res.json(lists[0])
   } else {
-    return next(new HttpError("Missing 'list' prop in payload or title is empty", 404));
+    return next(new HttpError("Missing 'list' prop in payload or title is empty", 404))
   }
 }
 
+const updateListTitle = async (req, res, next) => {
+  const listId = req.params.id
+  const errors = validationResult(req)
 
-exports.createList = createList;
+  if(errors.isEmpty()) {
+    try {
+      const { title } = req.body
+      const resp = await List.findByIdAndUpdate(listId, {title}, )
+      List.find({_id: listId}, "title _id boardId createdAt updatedAt position").then(lists => {
+        console.log(lists[0])
+        res.json(lists[0])
+      })
+      
+    } catch (e) {
+      next(new HttpError(`${e.message}`, 500))
+    }
+  } else {
+    next(new HttpError("The title field is empty.", 404))
+  }
+}
+
+exports.createList = createList
+exports.updateListTitle = updateListTitle
