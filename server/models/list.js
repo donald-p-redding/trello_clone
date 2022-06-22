@@ -31,16 +31,3 @@ const ListSchema = new Schema({
 
 const List = mongoose.model('list', ListSchema);
 module.exports = List;
-
-/*
-
-In schema:
-cards: [{type: ObjectId, ref: 'List'}]
-
-Outside schema:
-List.
-  populate:({
-    path: './card',
-  })
-
-*/
