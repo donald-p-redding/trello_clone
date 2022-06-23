@@ -1,15 +1,24 @@
 import { React, useEffect } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector, useDispatch } from "react-redux";
 import Lists from '../list_components/Lists';
 import { fetchBoard } from "../../features/boards";
+import { useLocation } from "react-router-dom";
 
 const Board = () => {
-  const { id } = useParams()
+  const { pathname } = useLocation();
+  let id;
+  const pathSections = pathname.split("/")
+
+  const dispatch = useDispatch();
+  
+  if(pathname.includes("boards")) {
+    id = pathSections[pathSections.length - 1]
+  } else {
+  }
+
   const { boards } = useSelector(state => state);
   const board = boards.find(b => b._id === id)
 
-  const dispatch = useDispatch();
 
 
   useEffect(() => {
