@@ -1,30 +1,40 @@
 import { React, useEffect } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector, useDispatch } from "react-redux";
 import Lists from '../list_components/Lists';
 import { fetchBoard } from "../../features/boards";
+import { useLocation } from "react-router-dom";
 
 const Board = () => {
-  const { id } = useParams()
-  const { boards } = useSelector(state => state);
+  const { pathname } = useLocation();
+  let id;
+  const pathSections = pathname.split("/")
+
+  const { boards, cards } = useSelector(state => state);
   const board = boards.find(b => b._id === id)
+  
+  if(pathname.includes("boards")) {
+    id = pathSections[pathSections.length - 1]
+  } else {
+    id = cards[0]?.boardId
+  }
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    dispatch(fetchBoard(id));
-  }, [dispatch, id])
-
-  if(board === undefined) {
-    return null
-  }
+    if(id) {
+      dispatch(fetchBoard(id));
+      /*
+        Do react versions dictate the ES syntax available
+          
+      */
+    }
+  }, [dispatch,id])
 
   return (
     <>
       <header>
         <ul>
-          <li id="title">{board.title}</li>
+          <li id="title">{board?.title}</li>
           <li className="star-icon icon"></li>
           <li className="private private-icon icon">Private</li>
         </ul>

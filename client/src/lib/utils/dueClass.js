@@ -1,7 +1,7 @@
 import { MS_PER_DAY } from "../../constants/Time"
 
 const dueClass = (card) => {
-  const cardDueDateMiliseconds = Date.parse(card.dueDate)
+  const cardDueDateMiliseconds = Date.parse(card?.dueDate)
   const todayMiliseconds = Date.now()
   const diff = todayMiliseconds - cardDueDateMiliseconds
 
