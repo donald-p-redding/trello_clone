@@ -1,15 +1,17 @@
-import { React, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCard } from "../../features/cards";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { React, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchCard } from "../../features/cards"
+import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
+import CardTitle from "./CardTitle"
+import CardLabels from "./CardLabels"
 
 const CardModal = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const  card = useSelector(state => {
     return state.cards.find(c => c._id === id)
-  }); 
+  })
 
   useEffect(() => {
       //in case of page refresh, can rebuild store from single card
@@ -25,10 +27,7 @@ const CardModal = () => {
         <i className="x-icon icon close-modal"></i>
         <header>
           <i className="card-icon icon .close-modal"></i>
-          <textarea className="list-title" style={{ height: "45px" }}>
-            Cards do many cool things. Click on this card to open it and learn
-            more...
-          </textarea>
+          <CardTitle title={card.title}/>
           <p>
             in list <a className="link">Stuff to try (this is a list)</a>
             <i className="sub-icon sm-icon"></i>
@@ -38,30 +37,7 @@ const CardModal = () => {
           <ul className="modal-outer-list">
             <li className="details-section">
               <ul className="modal-details-list">
-                <li className="labels-section">
-                  <h3>Labels</h3>
-                  <div className="member-container">
-                    <div className="green label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="yellow label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="orange label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="blue label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="purple label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="red label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <i className="plus-icon sm-icon"></i>
-                  </div>
-                </li>
+              <CardLabels labels={card.labels}/>
                 <li className="due-date-section">
                   <h3>Due Date</h3>
                   <div id="dueDateDisplay" className="overdue completed">
@@ -140,8 +116,7 @@ const CardModal = () => {
                   </small>
                   <div className="comment">
                     <label>
-                      <textarea required="" rows="1">
-                        The activities have not been implemented yet.
+                      <textarea required="" rows="1" value="The activities have not been implemented yet.">
                       </textarea>
                       <div>
                         <a className="light-button card-icon sm-icon"></a>
@@ -149,7 +124,7 @@ const CardModal = () => {
                         <a className="light-button email-icon sm-icon"></a>
                       </div>
                       <div>
-                        <p>You haven&apos;t typed anything!</p>
+                        <p>You haven&apos t typed anything!</p>
                         <input
                           type="submit"
                           className="button not-implemented"
@@ -183,8 +158,7 @@ const CardModal = () => {
                   </small>
                   <div className="comment">
                     <label>
-                      <textarea required="" rows="1">
-                        Example of a comment.
+                      <textarea required="" rows="1" value="Example of a comment.">
                       </textarea>
                       <div>
                         <a className="light-button card-icon sm-icon"></a>
@@ -192,7 +166,7 @@ const CardModal = () => {
                         <a className="light-button email-icon sm-icon"></a>
                       </div>
                       <div>
-                        <p>You haven&apos;t typed anything!</p>
+                        <p>You haven&apos t typed anything!</p>
                         <input
                           type="submit"
                           className="button not-implemented"
@@ -249,7 +223,7 @@ const CardModal = () => {
         </aside>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardModal;
+export default CardModal
