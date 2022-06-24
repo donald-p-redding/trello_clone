@@ -7,7 +7,7 @@ const NewListTile = () => {
   const [ title, setTitle ] = useState("")
 
   const { boards } = useSelector(state => state);
-  const { _id:boardId } = boards[0]
+  const boardId = boards[0]?._id
 
   const dispatch = useDispatch()
 

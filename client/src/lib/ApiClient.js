@@ -58,7 +58,7 @@ const apiClient = {
     }
   },
 
-  getCard: async({ id }) => {
+  getCard: async(id) => {
     try {
       const { data } = await axios.get(`${routes.CARDS_INDEX_URL}/${id}`)
       return data

@@ -28,8 +28,7 @@ const cardSlice = createSlice({
       return results
     })
     builder.addCase(fetchCard.fulfilled,  (state, action) => {
-      console.log("made it to card xtra reducer");
-      return action.payload
+      return [action.payload]
     })
   },
 })

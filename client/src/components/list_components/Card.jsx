@@ -1,6 +1,7 @@
 import React from "react"
 import dueClass from "../../lib/utils/dueClass"
 import dueDateStr from "../../lib/utils/dueDateStr"
+import { Link } from "react-router-dom"
 
 const Card = ({ card }) => {
   const { labels } = card
@@ -10,19 +11,21 @@ const Card = ({ card }) => {
 
   return (
     <div className="card-background">
-      <div className="card ">
-        <i className="edit-toggle edit-icon sm-icon"></i>
-        <div className="cover-image"></div>
-        <div className="card-info">
-          {labelsToRender}
-          <p>
-            {card.title}
-          </p>
+      <Link to={`/cards/${card._id}`}>
+        <div className="card ">
+          <i className="edit-toggle edit-icon sm-icon"></i>
+          <div className="cover-image"></div>
+          <div className="card-info">
+            {labelsToRender}
+            <p>
+              {card.title}
+            </p>
+          </div>
+          <div className="card-icons">
+            <i className={`clock-icon sm-icon ${dueClass(card)}`}>{dueDateStr(card)}</i>
+          </div>
         </div>
-        <div className="card-icons">
-          <i className={`clock-icon sm-icon ${dueClass(card)}`}>{dueDateStr(card)}</i>
-        </div>
-      </div>
+      </Link>
     </div>
   )
 }

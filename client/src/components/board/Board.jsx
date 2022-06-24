@@ -9,31 +9,28 @@ const Board = () => {
   let id;
   const pathSections = pathname.split("/")
 
-  const dispatch = useDispatch();
+  const { boards, cards } = useSelector(state => state);
+  const board = boards.find(b => b._id === id)
   
   if(pathname.includes("boards")) {
     id = pathSections[pathSections.length - 1]
   } else {
+    id = cards[0]?.boardId
   }
 
-  const { boards } = useSelector(state => state);
-  const board = boards.find(b => b._id === id)
-
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBoard(id));
+    if(id) {
+      dispatch(fetchBoard(id));
+    }
   }, [dispatch, id])
-
-  if(board === undefined) {
-    return null
-  }
 
   return (
     <>
       <header>
         <ul>
-          <li id="title">{board.title}</li>
+          <li id="title">{board?.title}</li>
           <li className="star-icon icon"></li>
           <li className="private private-icon icon">Private</li>
         </ul>

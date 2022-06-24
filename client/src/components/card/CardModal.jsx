@@ -2,15 +2,14 @@ import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCard } from "../../features/cards";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CardModal = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  let { cards } = useSelector(state => state); 
-  const card = cards.find(c => c._id === id)
-
-  console.log("cards", cards)
-  console.log("in card modal", card);
+  const  card = useSelector(state => {
+    return state.cards.find(c => c._id === id)
+  }); 
 
   useEffect(() => {
     dispatch(fetchCard(id))
@@ -22,7 +21,9 @@ const CardModal = () => {
 
   return (
     <div id="modal-container">
-      <div className="screen"></div>
+      <Link to={`/boards/${card.boardId}`}>
+        <div className="screen"></div>
+      </Link>
       <div id="modal">
         <i className="x-icon icon close-modal"></i>
         <header>
