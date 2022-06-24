@@ -5,11 +5,12 @@ import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import CardTitle from "./CardTitle"
 import CardLabels from "./CardLabels"
+import CardDueDate from "./CardDueDate"
 
 const CardModal = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const  card = useSelector(state => {
+  const card = useSelector(state => {
     return state.cards.find(c => c._id === id)
   })
 
@@ -27,7 +28,7 @@ const CardModal = () => {
         <i className="x-icon icon close-modal"></i>
         <header>
           <i className="card-icon icon .close-modal"></i>
-          <CardTitle title={card.title}/>
+          <CardTitle title={card?.title}/>
           <p>
             in list <a className="link">Stuff to try (this is a list)</a>
             <i className="sub-icon sm-icon"></i>
@@ -37,8 +38,9 @@ const CardModal = () => {
           <ul className="modal-outer-list">
             <li className="details-section">
               <ul className="modal-details-list">
-              <CardLabels labels={card.labels}/>
-                <li className="due-date-section">
+              <CardLabels labels={card?.labels}/>
+              <CardDueDate card={card}/>
+                {/* <li className="due-date-section">
                   <h3>Due Date</h3>
                   <div id="dueDateDisplay" className="overdue completed">
                     <input
@@ -49,8 +51,8 @@ const CardModal = () => {
                     />
                     Aug 4 at 10:42 AM <span>(past due)</span>
                   </div>
-                </li>
-              </ul>
+                </li> */}
+              </ul> 
               <form className="description">
                 <p>Description</p>
                 <span id="description-edit" className="link">

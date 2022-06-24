@@ -5,7 +5,7 @@ const CardLabels = ({ labels }) => {
   return (
     <li className="labels-section">
       <h3>Labels</h3>
-      {labels.map(color => {
+      {labels?.map(color => {
         return (
           <div key={color} className="member-container">
           <div className={`${color} label colorblindable`}></div>
