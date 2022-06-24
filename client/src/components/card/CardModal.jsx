@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import CardTitle from "./CardTitle"
 import CardLabels from "./CardLabels"
 import CardDueDate from "./CardDueDate"
+import CardDescription from "./CardDescription"
 
 const CardModal = () => {
   const { id } = useParams()
@@ -40,33 +41,8 @@ const CardModal = () => {
               <ul className="modal-details-list">
               <CardLabels labels={card?.labels}/>
               <CardDueDate card={card}/>
-                {/* <li className="due-date-section">
-                  <h3>Due Date</h3>
-                  <div id="dueDateDisplay" className="overdue completed">
-                    <input
-                      id="dueDateCheckbox"
-                      type="checkbox"
-                      className="checkbox"
-                      checked=""
-                    />
-                    Aug 4 at 10:42 AM <span>(past due)</span>
-                  </div>
-                </li> */}
               </ul> 
-              <form className="description">
-                <p>Description</p>
-                <span id="description-edit" className="link">
-                  Edit
-                </span>
-                <p className="textarea-overlay">
-                  Cards have a symbol to indicate if they contain a description.
-                </p>
-                <p id="description-edit-options" className="hidden">
-                  You have unsaved edits on this field.{" "}
-                  <span className="link">View edits</span> -{" "}
-                  <span className="link">Discard</span>
-                </p>
-              </form>
+              <CardDescription description={card?.description}/>
             </li>
             <li className="comment-section">
               <h2 className="comment-icon icon">Add Comment</h2>

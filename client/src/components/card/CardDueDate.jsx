@@ -5,7 +5,6 @@ import dueDateStr from "../../lib/utils/dueDateStr.js"
 
 
 const CardDueDate = ({ card }) => {
-  console.log("CardDueDate", card?.dueDate)
   return (
     <li className="due-date-section">
     <h3>Due Date</h3>
