@@ -23,8 +23,12 @@ const Board = () => {
   useEffect(() => {
     if(id) {
       dispatch(fetchBoard(id));
+      /*
+        Do react versions dictate the ES syntax available
+          
+      */
     }
-  }, [dispatch, id])
+  }, [dispatch,id])
 
   return (
     <>

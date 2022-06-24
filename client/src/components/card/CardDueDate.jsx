@@ -2,8 +2,6 @@ import { React } from 'react'
 import dueClass from "../../lib/utils/dueClass.js"
 import dueDateStr from "../../lib/utils/dueDateStr.js"
 
-
-
 const CardDueDate = ({ card }) => {
   return (
     <li className="due-date-section">

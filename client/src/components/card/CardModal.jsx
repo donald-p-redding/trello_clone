@@ -7,12 +7,16 @@ import CardTitle from "./CardTitle"
 import CardLabels from "./CardLabels"
 import CardDueDate from "./CardDueDate"
 import CardDescription from "./CardDescription"
+import CardComments from "./CardComments"
 
 const CardModal = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const card = useSelector(state => {
     return state.cards.find(c => c._id === id)
+  })
+  const list = useSelector(state => {
+    return state.lists.find(l => l._id === card?.listId)
   })
 
   useEffect(() => {
@@ -31,7 +35,10 @@ const CardModal = () => {
           <i className="card-icon icon .close-modal"></i>
           <CardTitle title={card?.title}/>
           <p>
-            in list <a className="link">Stuff to try (this is a list)</a>
+            in list 
+            <Link className="link" to={`/boards/${card?.boardId}`}>
+              {` ${list?.title}`}
+            </Link>
             <i className="sub-icon sm-icon"></i>
           </p>
         </header>
@@ -44,36 +51,7 @@ const CardModal = () => {
               </ul> 
               <CardDescription description={card?.description}/>
             </li>
-            <li className="comment-section">
-              <h2 className="comment-icon icon">Add Comment</h2>
-              <div>
-                <div className="member-container">
-                  <div className="card-member">TP</div>
-                </div>
-                <div className="comment">
-                  <label>
-                    <textarea
-                      required=""
-                      rows="1"
-                      placeholder="Write a comment..."
-                    ></textarea>
-                    <div>
-                      <a className="light-button card-icon sm-icon"></a>
-                      <a className="light-button smiley-icon sm-icon"></a>
-                      <a className="light-button email-icon sm-icon"></a>
-                      <a className="light-button attachment-icon sm-icon"></a>
-                    </div>
-                    <div>
-                      <input
-                        type="submit"
-                        className="button not-implemented"
-                        value="Save"
-                      />
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </li>
+              <CardComments comments={card?.comments}/>
             <li className="activity-section">
               <h2 className="activity-icon icon">Activity</h2>
               <ul className="horiz-list">
