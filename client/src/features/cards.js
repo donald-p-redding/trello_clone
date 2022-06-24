@@ -28,7 +28,9 @@ const cardSlice = createSlice({
       return results
     })
     builder.addCase(fetchCard.fulfilled,  (state, action) => {
-      return [action.payload]
+      const { _id:cardId } = action.payload
+      const filteredState = state.filter(c => c._id !== cardId)
+      return filteredState.concat(action.payload)
     })
   },
 })

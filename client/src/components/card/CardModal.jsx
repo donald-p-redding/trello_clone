@@ -12,16 +12,13 @@ const CardModal = () => {
   }); 
 
   useEffect(() => {
-    dispatch(fetchCard(id))
+      //in case of page refresh, can rebuild store from single card
+      dispatch(fetchCard(id))
   }, [dispatch, id])
-
-  if (card === undefined) {
-    return null
-  }
 
   return (
     <div id="modal-container">
-      <Link to={`/boards/${card.boardId}`}>
+      <Link to={`/boards/${card?.boardId}`}>
         <div className="screen"></div>
       </Link>
       <div id="modal">
